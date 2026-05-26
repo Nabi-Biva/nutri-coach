@@ -48,6 +48,7 @@ gem "sassc-rails"
 
 # gem d'authentification
 gem "devise"
+gem "omniauth"
 
 group :development, :test do
   gem "dotenv-rails"
