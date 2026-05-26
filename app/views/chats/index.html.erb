@@ -8,7 +8,7 @@
     <h2>Chats</h2>
     <ul>
       <% @chats.each do |chat| %>
-        <li><%= chat.title %></li>
+        <li><%= link_to chat.title, chat_path(chat) %></li>
       <% end %>
     </ul>
 

@@ -1,27 +1,22 @@
 class ChatsController < ApplicationController
+  before_action :authenticate_user!
+
+  def index
+    @chats = current_user.chats
+  end
 
   def create
-    @chat = Chat.new(title: "Untitled")
-    @chat.user = current_user
-    if @chat.save!
-      redirect_to chat_path(@chat), notice: "chat was successfully created."
+    @chat = current_user.chats.new(title: "Nouveau chat")
+    if @chat.save
+      redirect_to chat_path(@chat), notice: "Chat créé avec succès."
     else
+      @chats = current_user.chats
       render :index, status: :unprocessable_entity
     end
   end
 
   def show
-    @chat    = Chat.find(params[:id])
+    @chat    = current_user.chats.find(params[:id])
     @message = Message.new
   end
-
-  def index
-    @chats = Chat.all
-  end
-
-  # private
-
-  # def chat_params
-  #   params.require(:chat).permit(:title)
-  # end
 end
