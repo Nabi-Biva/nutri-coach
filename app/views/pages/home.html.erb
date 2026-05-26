@@ -74,9 +74,15 @@
 <div class="text-center py-5" style="background-color: #f8f9fa;">
   <h2 class="fw-bold mb-3">Prêt à transformer ton mode de vie ?</h2>
   <p class="text-muted mb-4">Rejoins NutriCoach et commence ton parcours nutritionnel dès aujourd'hui.</p>
-  <a href="<%= new_user_registration_path %>" class="btn btn-success btn-lg px-5 py-3">
-    Commencer🚀
-  </a>
+  <% if user_signed_in? %>
+    <a href="<%= chats_path %>" class="btn btn-success btn-lg px-5 py-3">
+      Voir mes chats 🚀
+    </a>
+  <% else %>
+    <a href="<%= new_user_registration_path %>" class="btn btn-success btn-lg px-5 py-3">
+      Commencer 🚀
+    </a>
+  <% end %>
 </div>
 
 <%# Footer %>
