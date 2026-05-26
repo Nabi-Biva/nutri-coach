@@ -1,3 +1,4 @@
+
 puts "🌱 Seeding..."
 
 # -------------------------------------------------------------------
@@ -12,6 +13,12 @@ puts "🌱 Seeding..."
 # -------------------------------------------------------------------
 # 2. USERS
 # -------------------------------------------------------------------
+User.destroy_all
+Profile.destroy_all
+Chat.destroy_all
+Recipe.destroy_all
+Message.destroy_all
+
 emma = User.create!(
   email:                 "emma@example.com",
   first_name:            "Emma",
