@@ -1,0 +1,6 @@
+<div id="new_message_container">
+  <%= simple_form_for [@chat, @message] do |f| %>
+    <%= f.input :content, label: "Ask a question", required: true %>
+    <%= f.button :submit, 'Ask LLM', class: 'btn btn-primary' %>
+  <% end %>
+</div>
