@@ -1,0 +1,17 @@
+
+
+<div class="row">
+  <div class="col">
+    <h1>Liste des chats</h1>
+     </div>
+  <div class="col-md-3">
+    <h2>Chats</h2>
+    <ul>
+      <% @chats.each do |chat| %>
+        <li><%= chat.title %></li>
+      <% end %>
+    </ul>
+
+    <%= button_to "New chat", chats_path, class: "btn btn-primary" %>
+  </div>
+</div>
