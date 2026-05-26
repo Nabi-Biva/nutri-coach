@@ -1,0 +1,28 @@
+<div class="container py-4">
+  <%= link_to "← Retour aux recettes",
+        chat_recipes_path(@recipe.chat),
+        class: "btn btn-outline-secondary btn-sm mb-3" %>
+
+  <div class="card shadow-sm">
+    <div class="card-body">
+      <h1 class="card-title mb-3"><%= @recipe.name %></h1>
+
+      <p class="text-muted small mb-4">
+        <% if @recipe.updated_at != @recipe.created_at %>
+            <%= @recipe.updated_at.strftime("%d/%m/%Y") %>
+        <% else %>
+            <%= @recipe.created_at.strftime("%d/%m/%Y") %>
+        <% end %>
+      </p>
+
+      <!-- TODO: sélecteur nombre de personnes (pour ajuster les quantités (pour plus tard)) -->
+
+      <hr>
+
+      <div class="recipe-content">
+        <!-- TODO: afficher recipe.content, mais avec les sauts de ligne rendus en HTML -->
+        <%= simple_format(@recipe.content) %>
+      </div>
+    </div>
+  </div>
+</div>

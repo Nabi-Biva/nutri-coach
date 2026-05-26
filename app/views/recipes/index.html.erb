@@ -1,0 +1,27 @@
+<div class="container py-4">
+  <h1 class="mb-4">Mes recettes</h1>
+
+  <div class="row">
+    <% @recipes.each do |recipe| %>
+      <div class="col-md-4 mb-4">
+        <div class="card h-100 shadow-sm">
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title"><%= recipe.name %></h5>
+            <p class="card-text text-muted small flex-grow-1">
+              <%= truncate(recipe.content, length: 100) %>
+              <% if recipe.updated_at != recipe.created_at %>
+                  <%= recipe.updated_at.strftime("%d/%m/%Y") %>
+              <% else %>
+                  <%= recipe.created_at.strftime("%d/%m/%Y") %>
+              <% end %>
+              <!-- TODO: bouton épingler pour le futur si on veut -->
+            </p>
+            <%= link_to "Voir la recette",
+                  chat_recipe_path(recipe.chat, recipe),
+                  class: "btn btn-outline-primary btn-sm mt-2" %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
