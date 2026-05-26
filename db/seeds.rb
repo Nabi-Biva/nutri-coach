@@ -4,11 +4,11 @@ puts "🌱 Seeding..."
 # -------------------------------------------------------------------
 # 1. NETTOYAGE (décommente si tu veux relancer les seeds)
 # -------------------------------------------------------------------
-# Message.destroy.all
-# Recipe.destroy.all
-# Chat.destroy.all
-# Profile.destroy.all
-# User.destroy.all
+Message.destroy_all
+Recipe.destroy_all
+Chat.destroy_all
+Profile.destroy_all
+User.destroy_all
 
 # -------------------------------------------------------------------
 # 2. USERS
