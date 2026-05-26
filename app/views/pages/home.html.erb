@@ -15,7 +15,7 @@
     <% if user_signed_in? %>
       <a href="<%= chats_path %>" class="btn btn-success btn-lg px-5 py-3 me-2">Voir mes chats</a>
     <% else %>
-      <a href="<%= new_user_registration_path %>" class="btn btn-success btn-lg px-5 py-3 me-2">Commencer gratuitement</a>
+      <a href="<%= new_user_registration_path %>" class="btn btn-success btn-lg px-5 py-3 me-2">Commencer</a>
       <a href="<%= new_user_session_path %>" class="btn btn-outline-light btn-lg px-5 py-3">Se connecter</a>
     <% end %>
   </div>
@@ -74,7 +74,7 @@
   <h2 class="fw-bold mb-3">Prêt à transformer ton mode de vie ?</h2>
   <p class="text-muted mb-4">Rejoins NutriCoach et commence ton parcours nutritionnel dès aujourd'hui.</p>
   <a href="<%= new_user_registration_path %>" class="btn btn-success btn-lg px-5 py-3">
-    Commencer gratuitement 🚀
+    Commencer🚀
   </a>
 </div>
 
