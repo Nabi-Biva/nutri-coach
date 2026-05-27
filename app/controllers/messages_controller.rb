@@ -3,7 +3,7 @@ class MessagesController < ApplicationController
 #     def create
 #       SYSTEM_PROMPT = "You are a Teaching Assistant.\n\nI am a student at the Le Wagon AI Software Development Bootcamp, learning how to code.\n\nHelp me break down my problem into small, actionable steps, without giving away solutions.\n\nAnswer concisely in Markdown."
 
-#     def create
+  def create
 #       @chat = chats.find(params[:chat_id])
 #       @message = @chat.challenge
 
@@ -20,6 +20,6 @@ class MessagesController < ApplicationController
 # else
 #   render "chats/show", status: :unprocessable_entity
 # end
-#   end
-#  end
+# end
+ end
 end
