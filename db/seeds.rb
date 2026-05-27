@@ -14,10 +14,6 @@ User.destroy_all
 # 2. USERS
 # -------------------------------------------------------------------
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 6d5da88f2b0ff3c0439ed0a3b1969bb974db5cde
 emma = User.create!(
   email:                 "emma@example.com",
   first_name:            "Emma",
