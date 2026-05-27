@@ -1,5 +1,6 @@
 class ChatsController < ApplicationController
   before_action :authenticate_user!
+  before_action :require_profile!, only: [:show]
 
   def index
     @chats = current_user.chats
@@ -16,7 +17,16 @@ class ChatsController < ApplicationController
   end
 
   def show
-    @chat    = current_user.chats.find(params[:id])
-    @message = Message.new
+    @chat     = current_user.chats.find(params[:id])
+    @messages = @chat.messages.order(:created_at)
+    @message  = Message.new
+  end
+
+  private
+
+  def require_profile!
+    return if current_user.profile
+
+    redirect_to new_profile_path, alert: "Complète ton profil nutritionnel d'abord !"
   end
 end

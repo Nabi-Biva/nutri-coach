@@ -1,0 +1,16 @@
+<%= turbo_stream.append "messages" do %>
+  <%= render @user_message %>
+<% end %>
+
+<%= turbo_stream.append "messages" do %>
+  <%= render @ai_message %>
+<% end %>
+
+<%= turbo_stream.replace "new_message_form" do %>
+  <%= turbo_frame_tag "new_message_form" do %>
+    <%= simple_form_for [@chat, Message.new] do |f| %>
+      <%= f.input :content, label: "Ton message", required: true %>
+      <%= f.button :submit, "Envoyer", class: "btn btn-success" %>
+    <% end %>
+  <% end %>
+<% end %>

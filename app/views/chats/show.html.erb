@@ -1,6 +1,21 @@
-<div id="new_message_container">
-  <%= simple_form_for [@chat, @message] do |f| %>
-    <%= f.input :content, label: "Ask a question", required: true %>
-    <%= f.button :submit, 'Ask LLM', class: 'btn btn-primary' %>
+<div class="container mt-4" style="max-width: 800px;">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h4 class="mb-0"><%= @chat.title %></h4>
+    <% if @chat.messages.where(role: "assistant").any? %>
+      <%= button_to "💾 Sauvegarder la recette", chat_recipes_path(@chat),
+            method: :post,
+            class: "btn btn-outline-success btn-sm" %>
+    <% end %>
+  </div>
+
+  <div id="messages" class="mb-4" style="min-height: 200px;">
+    <%= render @messages %>
+  </div>
+
+  <%= turbo_frame_tag "new_message_form" do %>
+    <%= simple_form_for [@chat, @message] do |f| %>
+      <%= f.input :content, label: "Ton message", required: true, input_html: { rows: 3 } %>
+      <%= f.button :submit, "Envoyer", class: "btn btn-success" %>
+    <% end %>
   <% end %>
 </div>
