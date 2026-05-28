@@ -41,6 +41,11 @@ class Profile < ApplicationRecord
 
   end
 
+  def complete?
+    sex.present? && birthday.present? && weight.present? &&
+      height.present? && goal.present? && allergy.present? && lifestyle.present?
+  end
+
   private
 
   def calculate_imc

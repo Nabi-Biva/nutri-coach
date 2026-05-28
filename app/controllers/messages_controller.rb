@@ -1,27 +1,30 @@
 class MessagesController < ApplicationController
   before_action :authenticate_user!
+  before_action :validate_message!, only: [:create]
+
+  MAX_MESSAGE_LENGTH = 4000
 
   def create
     @chat = current_user.chats.find(params[:chat_id])
-    return redirect_to new_profile_path, alert: "Complète ton profil d'abord !" unless current_user.profile
+    return redirect_to new_profile_path, alert: "Complète ton profil d'abord !" unless current_user.profile&.complete?
 
-    @user_message = @chat.messages.create!(role: "user", content: message_params[:content])
+    ActiveRecord::Base.transaction do
+      @user_message = @chat.messages.create!(role: "user", content: message_params[:content])
 
-    @chat.update(title: @user_message.content.truncate(50)) if @chat.messages.count == 1
+      if @chat.messages.where(role: "user").count == 1
+        @chat.update!(title: @user_message.content.truncate(50))
+      end
 
-    begin
       @ai_message = @chat.messages.create!(role: "assistant", content: call_llm)
-    rescue StandardError => e
-      Rails.logger.error "LLM Error: #{e.class} — #{e.message}"
-      Rails.logger.error e.backtrace.first(5).join("\n")
-      @user_message.destroy
-      return redirect_to chat_path(@chat), alert: "L'IA n'a pas pu répondre. Réessaie dans un instant.",
-                                           status: :see_other
     end
 
     respond_to do |format|
       format.turbo_stream
     end
+  rescue RubyLLM::Error, Faraday::Error => e
+    Rails.logger.error "LLM Error: #{e.class} — #{e.message}"
+    Rails.logger.error e.backtrace.first(5).join("\n")
+    redirect_to chat_path(@chat), alert: "L'IA n'a pas pu répondre. Réessaie dans un instant.", status: :see_other
   end
 
   private
@@ -37,6 +40,15 @@ class MessagesController < ApplicationController
 
   def message_params
     params.require(:message).permit(:content)
+  end
+
+  def validate_message!
+    content = params.dig(:message, :content)
+    if content.blank?
+      redirect_to chat_path(params[:chat_id]), alert: "Le message ne peut pas être vide.", status: :see_other
+    elsif content.length > MAX_MESSAGE_LENGTH
+      redirect_to chat_path(params[:chat_id]), alert: "Le message est trop long (max #{MAX_MESSAGE_LENGTH} caractères).", status: :see_other
+    end
   end
 
   def build_system_prompt
@@ -134,3 +146,4 @@ class MessagesController < ApplicationController
     else "hiver"
     end
   end
+end
