@@ -11,6 +11,36 @@ class Profile < ApplicationRecord
   validates :allergy, presence: true
   validates :lifestyle, presence: true
 
+  # Interprétation IMC
+  def imc_interpretation
+    if imc < 18.5
+      "Sous-poids"
+    elsif imc < 25
+      " Poids Normal"
+    elsif imc < 30
+      "Surpoids"
+    elsif imc < 35
+      "Obesité"
+    else
+      "Obesité sevère"
+    end
+  end
+
+  def imc_color
+    if imc < 18.5
+      "#0d6efd" # Bleu
+    elsif imc < 25
+      "#198754" # Vert
+    elsif imc < 30
+      "#ffc107" # Jaune
+    elsif imc < 35
+      "#fd7e14" # orange
+    else
+      "#dc3545" # rouge
+    end
+
+  end
+
   private
 
   def calculate_imc
