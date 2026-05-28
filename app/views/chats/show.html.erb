@@ -1,12 +1,5 @@
 <div class="container mt-4" style="max-width: 800px;">
-  <div class="d-flex justify-content-between align-items-center mb-3">
-    <h4 class="mb-0"><%= @chat.title %></h4>
-    <% if @chat.messages.where(role: "assistant").any? %>
-      <%= button_to "💾 Sauvegarder la recette", chat_recipes_path(@chat),
-            method: :post,
-            class: "btn btn-outline-success btn-sm" %>
-    <% end %>
-  </div>
+  <%= render partial: "chats/header", locals: { chat: @chat } %>
 
   <div id="messages" class="mb-4" style="min-height: 200px;">
     <%= render @messages %>

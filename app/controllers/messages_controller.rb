@@ -9,9 +9,11 @@ class MessagesController < ApplicationController
 
     begin
       @ai_message = @chat.messages.create!(role: "assistant", content: call_llm)
-    rescue StandardError
+    rescue StandardError => e
+      Rails.logger.error "LLM Error: #{e.class} — #{e.message}"
+      Rails.logger.error e.backtrace.first(5).join("\n")
       @user_message.destroy
-      return redirect_to chat_path(@chat), alert: "L'IA n'a pas pu répondre. Réessaie dans un instant."
+      return redirect_to chat_path(@chat), alert: "L'IA n'a pas pu répondre. Réessaie dans un instant.", status: :see_other
     end
 
     respond_to do |format|
@@ -22,7 +24,7 @@ class MessagesController < ApplicationController
   private
 
   def call_llm
-    llm_chat = RubyLLM.chat(model: "gpt-4o-mini")
+    llm_chat = RubyLLM.chat(model: "gpt-4.1-nano")
     llm_chat.with_instructions(build_system_prompt)
     @chat.messages.where(role: %w[user assistant]).order(:created_at).each do |msg|
       llm_chat.add_message(role: msg.role.to_sym, content: msg.content)

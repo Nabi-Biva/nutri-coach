@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   root to: "pages#home"
   resources :profiles, only: [:new, :create, :edit, :update]
   resources :recipes, only: [:index, :show]
-  resources :chats, only: [ :index, :create, :show ] do
+  resources :chats, only: [ :index, :create, :show, :update ] do
     resources :recipes, only: [ :index, :show, :new, :create, :edit, :update, :destroy ]
     resources :messages, only: [ :create ]
   end
