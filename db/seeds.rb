@@ -194,6 +194,15 @@ chat_lucas_1.recipes.create!(
   content: "**Ingrédients** (meal prep x4) : 800g filet poulet, 400g riz complet, 4 têtes de brocoli, huile d'olive, épices.\n\n**Préparation** : 1. Cuire le riz 25 min. 2. Cuire les brocolis vapeur 10 min. 3. Poêler le poulet 6 min par face. 4. Répartir dans 4 tupperwares."
 )
 
+chat_lucas_1.recipes.create!(
+  name: "Buddha Bowl quinoa poulet",
+  content: "**Ingrédients** : 100g quinoa, 150g filet poulet, 1 avocat, 1 patate douce, 100g pois chiches, roquette, huile d'olive, citron, sel, poivre.\n\n**Préparation** : 1. Cuire le quinoa 12 min. 2. Rôtir la patate douce au four 25 min à 200°C. 3. Poêler le poulet 5 min par face. 4. Dresser le tout dans un bol, ajouter avocat coupé et pois chiches. 5. Assaisonner huile d'olive + citron."
+)
+
+chat_lucas_1.recipes.create!(
+  name: "Buddha Bowl quinoa poulet",
+  content: "**Ingrédients** : 100g quinoa, 150g filet poulet, 1 avocat, 1 patate douce, 100g pois chiches, roquette, huile d'olive, citron, sel, poivre.\n\n**Préparation** : 1. Cuire le quinoa 12 min. 2. Rôtir la patate douce au four 25 min à 200°C. 3. Poêler le poulet 5 min par face. 4. Dresser le tout dans un bol, ajouter avocat coupé et pois chiches. 5. Assaisonner huile d'olive + citron."
+)
 chat_sofia_1.recipes.create!(
   name: "Energy balls cacao-dattes",
   content: "**Ingrédients** : 200g dattes, 50g amandes, 30g noix, 2 c.à.s. cacao cru, 1 c.à.s. huile de coco.\n\n**Préparation** : 1. Mixer tous les ingrédients. 2. Former des boules. 3. Réfrigérer 1h. Se conserve 1 semaine."
