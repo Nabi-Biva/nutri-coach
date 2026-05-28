@@ -1,0 +1,26 @@
+<div id="chat_header"
+     class="d-flex justify-content-between align-items-center mb-3"
+     data-controller="chat-title"
+     data-chat-title-url-value="<%= chat_path(chat) %>">
+
+  <div class="d-flex align-items-center gap-2">
+    <h4 class="mb-0"
+        data-chat-title-target="text"
+        data-action="click->chat-title#startEditing"
+        style="cursor: pointer;">
+      <%= chat.title %>
+    </h4>
+    <form data-chat-title-target="input" class="d-none">
+      <input type="text"
+             class="form-control form-control-sm"
+             value="<%= chat.title %>"
+             data-action="blur->chat-title#save keydown->chat-title#handleKeydown">
+    </form>
+  </div>
+
+  <% if chat.messages.where(role: "assistant").any? %>
+    <%= button_to "💾 Sauvegarder la recette", chat_recipes_path(chat),
+          method: :post,
+          class: "btn btn-outline-success btn-sm" %>
+  <% end %>
+</div>
