@@ -8,6 +8,26 @@ class RecipesController < ApplicationController
   def show
     @recipe = current_user.recipes.find(params[:id])
   end
+  # aujourhui
+def edit
+  @recipe = Recipe.find(params[:id])
+end
+
+def update
+  @recipe = Recipe.find(params[:id])
+  if @recipe.update(recipe_params)
+    redirect_to chat_recipe_path(@recipe.chat, @recipe), notice: "Recette mise à jour !"
+  else
+    render :edit
+  end
+end
+
+def destroy
+  @recipe = Recipe.find(params[:id])
+  @chat = @recipe.chat
+  @recipe.destroy
+  redirect_to chat_recipes_path(@chat), notice: "Recette supprimée !"
+end
 
   def create
     @chat = current_user.chats.find(params[:chat_id])
@@ -20,4 +40,11 @@ class RecipesController < ApplicationController
     redirect_to redirect_path, notice: @recipe.persisted? ? "Recette sauvegardée !" : nil,
                                alert: @recipe.persisted? ? nil : "Impossible de sauvegarder la recette."
   end
+
+  private
+
+  def recipe_params
+    params.require(:recipe).permit(:name, :content)
+  end
+
 end
