@@ -13,7 +13,7 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   root to: "pages#home"
-  resources :profiles, only: [:new, :create, :edit, :update]
+  resources :profiles, only: [:new, :create, :edit, :update, :show]
   resources :recipes, only: [:index, :show]
   resources :chats, only: [ :index, :create, :show, :update ] do
     resources :recipes, only: [ :index, :show, :new, :create, :edit, :update, :destroy ]
