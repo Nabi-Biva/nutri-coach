@@ -1,28 +1,21 @@
-<div class="container py-4">
+<div class="container py-5" style="max-width: 800px;">
   <%= link_to "← Retour aux recettes",
         chat_recipes_path(@recipe.chat),
-        class: "btn btn-outline-secondary btn-sm mb-3" %>
+        class: "btn btn-outline-secondary mb-4" %>
 
-  <div class="card shadow-sm">
-    <div class="card-body">
-      <h1 class="card-title mb-3"><%= @recipe.name %></h1>
+  <div class="card border-0 shadow p-5" style="border-radius: 16px;">
+    <div class="fs-1 mb-3">🥗</div>
+    <h1 class="fw-bold mb-1"><%= @recipe.name %></h1>
 
-      <p class="text-muted small mb-4">
-        <% if @recipe.updated_at != @recipe.created_at %>
-            <%= @recipe.updated_at.strftime("%d/%m/%Y") %>
-        <% else %>
-            <%= @recipe.created_at.strftime("%d/%m/%Y") %>
-        <% end %>
-      </p>
+   <% if @recipe.updated_at != @recipe.created_at %>
+    <p class="text-muted small mb-4">Modifiée le <%= @recipe.updated_at.strftime("%d/%m/%Y") %></p>
+   <% end %>
 
-      <!-- TODO: sélecteur nombre de personnes (pour ajuster les quantités (pour plus tard)) -->
+    <hr>
 
-      <hr>
-
-      <div class="recipe-content">
-        <!-- TODO: afficher recipe.content, mais avec les sauts de ligne rendus en HTML -->
-        <%= simple_format(@recipe.content) %>
-      </div>
+    <div class="mt-4">
+      <% markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML) %>
+      <%= markdown.render(@recipe.content).html_safe %>
     </div>
   </div>
 </div>

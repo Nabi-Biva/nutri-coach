@@ -2,6 +2,7 @@ source "https://rubygems.org"
 
 #gem IA
 gem "ruby_llm", "~> 1.2.0"
+gem "redcarpet"
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 8.1.3"
 # The modern asset pipeline for Rails [https://github.com/rails/propshaft]
