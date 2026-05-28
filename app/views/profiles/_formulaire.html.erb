@@ -1,24 +1,79 @@
+
 <%= simple_form_for profile do |f| %>
+  <!-- SEX -->
   <%= f.input :sex,
-      collection: ["Male", "Female", "Other"],
-      prompt: "Select your sex" %>
-
-  <%= f.input :birthday, as: :date %>
-
-  <%= f.input :weight, as: :float,
+  label: "Sexe",
+  required: false,
+      collection: ["Masculin", "Feminin", "Ne pas préciser"],
+      prompt: "Sélectionnez votre sexe",
       input_html: {
-        placeholder: "Enter your weight (Ex: 64,5kg)", step: :any } %>
-
-
-  <%= f.input :height,
-      as: :float,
-      input_html: {
-        placeholder: "Enter your height (Ex: 1,8 m)",
-        step: :any
+        class: "rounded-3"
       } %>
 
-  <%= f.input :goal %>
-  <%= f.input :allergy %>
-  <%= f.input :lifestyle %>
+  <!-- BIRTHDAY -->
+  <%= f.input :birthday,
+      as: :string,
+  required: false,
 
-<%= f.button :submit, profile.persisted? ? "Modify your profile" : "Create your profile", class: "btn btn-secondary" %><% end %>
+      label: "Date de naissance",
+      input_html: {
+        type: "date",
+        class: "rounded-3"
+      } %>
+
+  <!-- WEIGHT -->
+  <%= f.input :weight,
+      as: :string,
+      required: false,
+      label: "Poids (kg)",
+      input_html: {
+        placeholder: "64.5",
+        class: "rounded-3"
+      } %>
+
+  <!-- HEIGHT -->
+  <%= f.input :height,
+      as: :string,
+  required: false,
+      label: "Taille (m)",
+      input_html: {
+        placeholder: "1.75",
+        class: "rounded-3"
+      } %>
+
+  <!-- GOAL -->
+  <%= f.input :goal,
+  required: false,
+
+  label: "Objectif",
+      input_html: {
+        placeholder: "Dites nous votre objectif",
+        class: "rounded-3"
+      } %>
+
+  <!-- ALLERGY -->
+  <%= f.input :allergy,
+  label: "Allergies",
+  required: false,
+      input_html: {
+        placeholder: "Listez vos allergies",
+        class: "rounded-3"
+      } %>
+
+  <!-- LIFESTYLE -->
+  <%= f.input :lifestyle,
+  label: "Style de vie",
+  required: false,
+  prompt: "Sélectionnez votre style de vie",
+  collection: [ "Sédentaire", "Actif", "Sportif", "Très sportif", "Autre"  ],
+      input_html: {
+        class: "rounded-3"
+      } %>
+
+  <!-- BUTTON -->
+  <div class="text-center mt-4">
+    <%= f.button :submit, "Enregistrer mon profile",
+        class: "btn text-white rounded-pill px-4 py-2",
+        style: "background-color: #2d6a4f; border: none;" %>
+  </div>
+<% end %>

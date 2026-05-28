@@ -11,7 +11,7 @@ class ProfilesController < ApplicationController
     @profile = current_user.build_profile(profile_params)
 
     if @profile.save
-      redirect_to edit_profile_path(@profile), notice: "Profile was successfully created."
+      redirect_to profile_path(@profile), notice: "Profil créé avec succès"
     else
       render :new, status: :unprocessable_entity
     end
@@ -22,14 +22,15 @@ class ProfilesController < ApplicationController
 
   def update
     if @profile.update(profile_params)
-      redirect_to edit_profile_path(@profile), notice: "Profile was successfully updated."
+      redirect_to profile_path(@profile), notice: "Profil mis à jour"
+
     else
       render :edit, status: :unprocessable_entity
     end
   end
 
   def show
-    @profile = current_user
+    @profile = current_user.profile
   end
 
   private
