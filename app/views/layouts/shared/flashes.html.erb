@@ -1,25 +1,36 @@
-<% if notice %>
-  <div class="alert alert-info alert-dismissible fade show m-1" role="alert">
-    <button
-      type="button"
-      class="btn-close"
-      data-bs-dismiss="alert"
-      aria-label="Close"
-    ></button>
+<div class="container mt-3">
+      <% flash.each do |type, message| %>
+        <% css_class = type == "notice" ? "alert-success" : "alert-danger" %>
+        <div class="alert <%= css_class %> alert-dismissible fade show" role="alert">
+          <%= message %>
+          <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+      <% end %>
+    </div>
 
-    <%= notice %>
-  </div>
-<% end %>
 
-<% if alert %>
-  <div class="alert alert-warning alert-dismissible fade show m-1" role="alert">
-    <button
-      type="button"
-      class="btn-close"
-      data-bs-dismiss="alert"
-      aria-label="Close"
-    ></button>
+<%# if notice %>
+  <!-- <div class="alert alert-info alert-dismissible fade show m-1" role="alert"> -->
+    <!-- <button -->
+      <!-- type="button" -->
+      <!-- class="btn-close" -->
+      <!-- data-bs-dismiss="alert" -->
+      <!-- aria-label="Close" -->
+    <!-- ></button> -->
 
-    <%= alert %>
-  </div>
-<% end %>
+    <%#= notice %>
+  <!-- </div> -->
+<%# end %>
+
+<%# if alert %>
+  <!-- <div class="alert alert-warning alert-dismissible fade show m-1" role="alert"> -->
+    <!-- <button -->
+      <!-- type="button" -->
+      <!-- class="btn-close" -->
+      <!-- data-bs-dismiss="alert" -->
+      <!-- aria-label="Close" -->
+    <!-- ></button> -->
+
+    <%#= alert %>
+  <!-- </div> -->
+<%# end %>
