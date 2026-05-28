@@ -27,7 +27,7 @@
     style: "background-color: #40c074;",
     onmouseover: "this.style.backgroundColor='#36a862'",
     onmouseout: "this.style.backgroundColor='#40c074'" do %>
-  <i class="bi bi-plus-lg"></i>
+  <i class="fa-solid fa-plus"></i>
   <span class="text-white">Nouveau chat</span>
 <% end %>
     </div>
@@ -42,20 +42,27 @@
     <!-- Chat list -->
     <div class="flex-grow-1 overflow-auto px-2 pb-3" id="chatList">
       <% @chats.each do |chat| %>
-        <a href="<%= chat_path(chat) %>"
-          class="d-flex align-items-center gap-2 px-2 py-2 rounded text-decoration-none text-white mb-1 chat-link <%= 'active-chat' if chat == @chat %>">
-          <i class="bi bi-chat text-white-50"></i>
-          <span class="text-truncate flex-grow-1 small"><%= chat.title %></span>
-          <div class="chat-actions d-none gap-1">
-            <button class="btn btn-sm p-0 px-1 text-white-50" onclick="event.stopPropagation()">
-              <i class="bi bi-pencil" style="font-size:12px;"></i>
+        <div class="d-flex align-items-center gap-2 px-2 py-2 rounded mb-1 chat-link <%= 'active-chat' if chat == @chat %>">
+          <a href="<%= chat_path(chat) %>"
+             class="d-flex align-items-center gap-2 flex-grow-1 text-decoration-none text-white"
+             style="min-width: 0;">
+            <i class="fa-solid fa-comment text-white-50"></i>
+            <span class="text-truncate small" id="chat-title-<%= chat.id %>"><%= chat.title %></span>
+          </a>
+          <div class="chat-actions d-flex gap-1">
+            <button class="btn btn-sm p-0 px-1 text-white-50"
+                    onclick="event.stopPropagation();var t=prompt('Nouveau nom :','<%= j chat.title %>');if(t&&t.trim()){fetch('<%= chat_path(chat) %>',{method:'PATCH',headers:{'Content-Type':'application/json','X-CSRF-Token':document.querySelector('[name=csrf-token]').content,'Accept':'text/vnd.turbo-stream.html'},body:JSON.stringify({chat:{title:t.trim()}})}).then(function(r){return r.text()}).then(function(html){if(html){Turbo.renderStreamMessage(html)}})}">
+              <i class="fa-solid fa-pen" style="font-size:12px;"></i>
             </button>
-            <button class="btn btn-sm p-0 px-1 text-white-50" onclick="event.stopPropagation()">
-              <i class="bi bi-trash" style="font-size:12px;"></i>
-            </button>
+            <%= button_to chat_path(chat), method: :delete,
+                  class: "btn btn-sm p-0 px-1 text-white-50",
+                  form_class: "d-inline",
+                  data: { turbo_confirm: "Supprimer ce chat ?" } do %>
+              <i class="fa-solid fa-trash" style="font-size:12px;"></i>
+            <% end %>
           </div>
+        </div>
       <% end %>
-        </a>
     </div>
 
     <!-- Footer -->
@@ -69,7 +76,7 @@
         <!-- <div class="text-white-50" style="font-size:11px;">Mon profil</div> -->
         <div><a href="<%= current_user.profile.persisted? ? profile_path(current_user.profile) : new_profile_path %>" class="btn btn-outline-light btn-sm">Mon profil</a></div>
       <button class="btn p-1 text-white-50">
-        <i class="bi bi-gear"></i>
+        <i class="fa-solid fa-gear"></i>
       </button>
     </div>
   </div>
@@ -82,7 +89,7 @@
     <!-- </div> -->
     <!-- <div class="flex-grow-1 d-flex align-items-center justify-content-center text-muted"> -->
       <!-- <div class="text-center"> -->
-        <!-- <i class="bi bi-chat-dots fs-1 d-block mb-2"></i> -->
+        <!-- <i class="fa-solid fa-comment-dots fs-1 d-block mb-2"></i> -->
         <!-- <small>Sélectionnez un chat ou démarrez<br>une nouvelle conversation</small> -->
       <!-- </div> -->
     <!-- </div> -->

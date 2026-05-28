@@ -34,6 +34,12 @@ class ChatsController < ApplicationController
     end
   end
 
+  def destroy
+    @chat = current_user.chats.find(params[:id])
+    @chat.destroy
+    redirect_to chats_path, notice: "Chat supprimé.", status: :see_other
+  end
+
   private
 
   def require_profile!

@@ -1,4 +1,4 @@
-# class MessagesController < ApplicationController
+class MessagesController < ApplicationController
   before_action :authenticate_user!
 
   def create
@@ -7,13 +7,16 @@
 
     @user_message = @chat.messages.create!(role: "user", content: message_params[:content])
 
+    @chat.update(title: @user_message.content.truncate(50)) if @chat.messages.count == 1
+
     begin
       @ai_message = @chat.messages.create!(role: "assistant", content: call_llm)
     rescue StandardError => e
       Rails.logger.error "LLM Error: #{e.class} — #{e.message}"
       Rails.logger.error e.backtrace.first(5).join("\n")
       @user_message.destroy
-      return redirect_to chat_path(@chat), alert: "L'IA n'a pas pu répondre. Réessaie dans un instant.", status: :see_other
+      return redirect_to chat_path(@chat), alert: "L'IA n'a pas pu répondre. Réessaie dans un instant.",
+                                           status: :see_other
     end
 
     respond_to do |format|
@@ -41,10 +44,10 @@
     age = ((Date.today - profile.birthday) / 365).to_i
     imc = profile.imc.round(1)
     bmr_mifflin = if profile.sex == "homme"
-        (10 * profile.weight) + (6.25 * (profile.height * 100)) - (5 * age) + 5
-      else
-        (10 * profile.weight) + (6.25 * (profile.height * 100)) - (5 * age) - 161
-      end
+                    (10 * profile.weight) + (6.25 * (profile.height * 100)) - (5 * age) + 5
+                  else
+                    (10 * profile.weight) + (6.25 * (profile.height * 100)) - (5 * age) - 161
+                  end
 
     <<~PROMPT
       Tu es Coach Nutrition IA, un nutritionniste certifié avec une approche scientifique. Tu travailles de façon méthodique : tu analyses, tu questionnes, puis tu proposes.
@@ -111,11 +114,14 @@
   end
 
   def imc_category(imc)
-    case imc
-    when ..18.5 then "insuffisance pondérale"
-    when 18.5..24.9 then "poids normal"
-    when 25..29.9 then "surpoids"
-    when 30.. then "obésité"
+    if imc < 18.5
+      "insuffisance pondérale"
+    elsif imc < 25
+      "poids normal"
+    elsif imc < 30
+      "surpoids"
+    else
+      "obésité"
     end
   end
 
