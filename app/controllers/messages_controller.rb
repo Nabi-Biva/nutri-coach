@@ -134,3 +134,4 @@ class MessagesController < ApplicationController
     else "hiver"
     end
   end
+end
