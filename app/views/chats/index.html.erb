@@ -1,19 +1,4 @@
 
-
-<!-- <div class="row"> -->
-  <!-- <div class="col"> -->
-    <!-- <h1>Liste des chats</h1> -->
-
-    <%#= button_to "New chat", chats_path, class: "btn btn-success" %>
-      <!-- <ul> -->
-      <%# @chats.each do |chat| %>
-        <!-- <li><%#= link_to chat.title, chat_path(chat) %></li> -->
-      <%# end %>
-    <!-- </ul> -->
-
-
-  <!-- </div> -->
-<!-- </div> -->
 <div class="d-flex" style="height: 100vh;">
   <div class="d-flex flex-column" style="width: 260px; background-color: #2d6a4f;">
 
@@ -66,33 +51,19 @@
     </div>
 
     <!-- Footer -->
-    <div class="p-3 border-top border-white border-opacity-25 d-flex align-items-center gap-2">
+    <div class="p-3 border-top border-white border-opacity-25 d-flex align-items-center justify-content-center gap-2 position-fixed bottom-0"
+      style="width: 260px; background-color: #2d6a4f;">
+
+      <!-- Avatar -->
       <div class="rounded-circle d-flex align-items-center justify-content-center text-white fw-medium"
-           style="width:32px; height:32px; background:rgba(255,255,255,0.18); font-size:12px; flex-shrink:0;">
+        style="width:32px; height:32px; background:rgba(255,255,255,0.18); font-size:12px; flex-shrink:0;">
         <%= current_user.first_name[0] %><%= current_user.last_name[0] %>
       </div>
-      <div class="flex-grow-1">
-        <div class="text-white small fw-medium"><%= current_user.first_name %> <%= current_user.last_name %></div>
-        <!-- <div class="text-white-50" style="font-size:11px;">Mon profil</div> -->
-        <div><a href="<%= current_user.profile.persisted? ? profile_path(current_user.profile) : new_profile_path %>" class="btn btn-outline-light btn-sm">Mon profil</a></div>
-      <button class="btn p-1 text-white-50">
-        <i class="fa-solid fa-gear"></i>
-      </button>
-    </div>
-  </div>
 
-  <!-- Main content -->
-  <!-- <div class="flex-grow-1 d-flex flex-column bg-light"> -->
-    <!-- <div class="p-3 bg-white border-bottom"> -->
-      <!-- <div class="fw-medium" id="mainTitle">Titre du chat</div> -->
-      <!-- <small class="text-muted">Chat ouvert</small> -->
-    <!-- </div> -->
-    <!-- <div class="flex-grow-1 d-flex align-items-center justify-content-center text-muted"> -->
-      <!-- <div class="text-center"> -->
-        <!-- <i class="fa-solid fa-comment-dots fs-1 d-block mb-2"></i> -->
-        <!-- <small>Sélectionnez un chat ou démarrez<br>une nouvelle conversation</small> -->
-      <!-- </div> -->
-    <!-- </div> -->
-  <!-- </div> -->
+      <!-- Nom utilisateur -->
+      <div class="text-white small fw-medium">
+        <%= current_user.first_name %>
+        <%= current_user.last_name %>
+      </div>    </div>
   </div>
 </div>
