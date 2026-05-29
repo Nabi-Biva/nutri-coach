@@ -2,17 +2,14 @@
   <%= link_to "← Retour aux recettes",
         chat_recipes_path(@recipe.chat),
         class: "btn btn-outline-secondary mb-4" %>
-
+    <% markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, autolink: true, tables: true) %>
   <div class="card border-0 shadow p-5" style="border-radius: 16px;">
     <div class="fs-1 mb-3">🥗</div>
-    <h1 class="fw-bold mb-1"><%= @recipe.name %></h1>
-
-
+    <h1 class="fw-bold mb-1"><%= markdown.render(@recipe.name).html_safe %></h1>
 
     <hr>
 
     <div class="mt-4">
-      <% markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, autolink: true, tables: true) %>
       <%= markdown.render(@recipe.content).html_safe %>
     </div>
 

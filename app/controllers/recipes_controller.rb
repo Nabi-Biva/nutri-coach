@@ -35,7 +35,7 @@ end
 
     return redirect_to chat_path(@chat), alert: "Aucune réponse de l'IA à sauvegarder." if last_ai_message.nil?
 
-    @recipe = @chat.recipes.new(name: last_ai_message.content.truncate(60), content: last_ai_message.content)
+    @recipe = @chat.recipes.new(name: last_ai_message.content.truncate(40), content: last_ai_message.content)
     redirect_path = @recipe.save ? recipes_path : chat_path(@chat)
     redirect_to redirect_path, notice: @recipe.persisted? ? "Recette sauvegardée !" : nil,
                                alert: @recipe.persisted? ? nil : "Impossible de sauvegarder la recette."
