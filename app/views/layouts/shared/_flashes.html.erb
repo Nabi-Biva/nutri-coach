@@ -1,0 +1,9 @@
+<div class="container mt-3">
+      <% flash.each do |type, message| %>
+        <% css_class = type == "notice" ? "alert-success" : "alert-danger" %>
+        <div class="alert <%= css_class %> alert-dismissible fade show" role="alert">
+          <%= message %>
+          <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+      <% end %>
+    </div>
