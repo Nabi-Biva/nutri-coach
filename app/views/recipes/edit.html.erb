@@ -1,0 +1,14 @@
+<div class="container py-5" style="max-width: 800px;">
+  <%= link_to "← Retour", chat_recipe_path(@recipe.chat, @recipe),
+        class: "btn btn-outline-secondary mb-4" %>
+
+  <div class="card border-0 shadow p-5" style="border-radius: 16px;">
+    <h1 class="fw-bold mb-4">✏️ Modifier la recette</h1>
+
+    <%= simple_form_for [@recipe.chat, @recipe] do |f| %>
+      <%= f.input :name, label: "Nom de la recette" %>
+      <%= f.input :content, label: "Contenu", input_html: { rows: 10 } %>
+      <%= f.button :submit, "Sauvegarder", class: "btn btn-success px-4" %>
+    <% end %>
+  </div>
+</div>
