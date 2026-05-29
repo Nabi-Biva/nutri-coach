@@ -1,5 +1,6 @@
 <div class="d-flex <%= message.role == 'user' ? 'justify-content-end' : 'justify-content-start' %> mb-2" id="message-<%= message.id %>">
   <div class="p-3 rounded" style="max-width: 75%; background-color: <%= message.role == 'user' ? '#2d6a4f' : '#f0f0f0' %>; color: <%= message.role == 'user' ? 'white' : '#333' %>;">
-    <%= simple_format message.content %>
+    <% markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, autolink: true, tables: true) %>
+    <%= markdown.render(message.content).html_safe %>
   </div>
 </div>

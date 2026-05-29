@@ -7,12 +7,12 @@
     <div class="fs-1 mb-3">🥗</div>
     <h1 class="fw-bold mb-1"><%= @recipe.name %></h1>
 
- 
+
 
     <hr>
 
     <div class="mt-4">
-      <% markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML) %>
+      <% markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, autolink: true, tables: true) %>
       <%= markdown.render(@recipe.content).html_safe %>
     </div>
 
