@@ -7,9 +7,7 @@
     <div class="fs-1 mb-3">🥗</div>
     <h1 class="fw-bold mb-1"><%= @recipe.name %></h1>
 
-   <% if @recipe.updated_at != @recipe.created_at %>
-    <p class="text-muted small mb-4">Modifiée le <%= @recipe.updated_at.strftime("%d/%m/%Y") %></p>
-   <% end %>
+ 
 
     <hr>
 
@@ -17,5 +15,17 @@
       <% markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML) %>
       <%= markdown.render(@recipe.content).html_safe %>
     </div>
+
+    <%# ajourdhi %>
+    <div class="d-flex gap-2 mt-4">
+      <%= link_to "✏️ Modifier", edit_chat_recipe_path(@recipe.chat, @recipe),
+            class: "btn btn-outline-secondary" %>
+      <%= button_to "🗑️ Supprimer", chat_recipe_path(@recipe.chat, @recipe),
+            method: :delete,
+            data: { turbo_confirm: "Tu es sûr de vouloir supprimer cette recette ?" },
+            class: "btn btn-outline-danger" %>
+    </div>
+
+
   </div>
 </div>
