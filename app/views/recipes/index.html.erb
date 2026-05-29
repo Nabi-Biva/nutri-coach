@@ -7,9 +7,6 @@
           <div class="card-body p-4">
             <div class="fs-2 mb-2">🥗</div>
             <h5 class="fw-bold"><%= recipe.name %></h5>
-            <% if recipe.updated_at != recipe.created_at %>
-              <p class="text-muted small">Modifiée le <%= recipe.updated_at.strftime("%d/%m/%Y") %></p>
-            <% end %>
           </div>
           <div class="card-footer border-0 bg-transparent pb-4 px-4">
             <%= link_to "Voir la recette", chat_recipe_path(recipe.chat, recipe), class: "btn w-100 text-white fw-bold", style: "background-color: #2d6a4f;" %>
